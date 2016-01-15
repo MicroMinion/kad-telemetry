@@ -47,3 +47,12 @@ var dht = new kad.Node({
   storage: kad.storage.FS('...')
 });
 ```
+
+Once you have been connected to the network, you can lookup a node's profile.
+
+```js
+transport.telemetry.getProfile(contact);
+// Example profile:
+// This node has a ping of 54ms and has responded to 5 of 6 requests 
+//  { metrics: { latency: 54, availability: [6, 5] } }
+```
