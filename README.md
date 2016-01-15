@@ -1,6 +1,10 @@
 Kad Telemetry
 =============
 
+[![Build Status](https://img.shields.io/travis/kadtools/kad-telemetry.svg?style=flat-square)](https://travis-ci.org/kadtools/kad-telemetry)
+[![Coverage Status](https://img.shields.io/coveralls/kadtools/kad-telemetry.svg?style=flat-square)](https://coveralls.io/r/kadtools/kad-telemetry)
+[![NPM](https://img.shields.io/npm/v/kad-telemetry.svg?style=flat-square)](https://www.npmjs.com/package/kad-telemetry)
+
 Framework for analyzing network behavior and performance for
 [Kad](https://github.com/kadtools/kad).
 
