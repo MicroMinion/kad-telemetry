@@ -1,0 +1,44 @@
+{
+  "name": "kad-telemetry",
+  "version": "0.0.0",
+  "description": "framework for analyzing network behavior and performance for kad",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run testsuite && npm run linter",
+    "testsuite": "./node_modules/.bin/mocha test/** --recursive",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive",
+    "linter": "./node_modules/.bin/jshint --config .jshintrc ./index.js ./lib ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadtools/kad-telemetry.git"
+  },
+  "keywords": [
+    "kad",
+    "telemetry",
+    "network",
+    "performance"
+  ],
+  "author": "Gordon Hall <gordon@gordonwritescode.com>",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/kadtools/kad-telemetry/issues"
+  },
+  "homepage": "https://github.com/kadtools/kad-telemetry#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2",
+    "jshint": "^2.9.1",
+    "mocha": "^2.3.4",
+    "sinon": "^1.17.2"
+  },
+  "dependencies": {
+    "kad": "^1.2.1",
+    "msgpack5": "^3.3.0"
+  }
+}
