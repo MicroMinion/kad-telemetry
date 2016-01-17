@@ -19,8 +19,7 @@ Quick Start
 -----------
 
 Decorate your
-[transport adapter](https://github.com/kadtools/kad/blob/master/doc/rpc.md)
-and optionally supply it with some [metrics](doc/metrics.md) (defaults to all).
+[transport adapter](https://github.com/kadtools/kad/blob/master/doc/rpc.md).
 
 ```js
 // Import dependencies
@@ -32,17 +31,28 @@ var TelemetryTransport = telemetry.TransportDecorator(kad.transports.UDP);
 
 // Create your transport instance
 var transport = new TelemetryTransport(contact, {
-  telemetry: {
-    filename: 'path/to/telemetry.data', // Created if it doesn't exist
-    metrics: [
-      telemetry.metrics.Availability,
-      telemetry.metrics.Latency
-    ]
-  }
+  telemetry: { filename: 'path/to/telemetry.data' }
 });
+```
 
+You might also like to extend Kad's peer selection by scoring peers based on
+the collected metrics by decorating your
+[router](https://github.com/kadtools/kad/blob/master/doc/router.md).
+
+```js
+// Decorate the default router
+var TelemetryRouter = telemetry.RouterDecorator(kad.Router);
+
+// Create your router instance
+var router = new TelemetryRouter({ transport: transport });
+```
+
+Then create your Kad node and party.
+
+```js
 // Create your node
 var dht = new kad.Node({
+  router: router,
   transport: transport,
   storage: kad.storage.FS('...')
 });
@@ -53,6 +63,6 @@ Once you have been connected to the network, you can lookup a node's profile.
 ```js
 transport.telemetry.getProfile(contact);
 // Example profile:
-// This node has a ping of 54ms and has responded to 5 of 6 requests 
+// This node has a ping of 54ms and has responded to 5 of 6 requests
 //  { metrics: { latency: 54, availability: [6, 5] } }
 ```
