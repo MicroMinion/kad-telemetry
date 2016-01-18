@@ -129,7 +129,7 @@ describe('RouterDecorator', function() {
           throughput: [1, 512, 10]
         }
       };
-      var _getProf = sinon.stub(router._rpc.telemetry, 'getProfile', function(c) {
+      var _get = sinon.stub(router._rpc.telemetry, 'getProfile', function(c) {
         return new Profile({
           metrics: metrics[c.nodeID]
         });
@@ -145,7 +145,7 @@ describe('RouterDecorator', function() {
       });
 
       after(function() {
-        _getProf.restore();
+        _get.restore();
       });
 
     });
