@@ -39,6 +39,7 @@
     "sinon": "^1.17.2"
   },
   "dependencies": {
+    "async-each": "^1.0.1",
     "kad": "^1.2.1"
   }
 }
