@@ -1,6 +1,6 @@
 {
-  "name": "kad-telemetry",
-  "version": "0.0.1",
+  "name": "kad-telemetry-js",
+  "version": "0.1.0",
   "description": "framework for analyzing network behavior and performance for kad",
   "main": "index.js",
   "directories": {
@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "async-each": "^1.0.1",
-    "kad": "^1.2.1"
+    "kad-js": "^1.6.0",
+    "lodash": "^4.15.0"
   }
 }
