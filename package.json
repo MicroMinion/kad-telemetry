@@ -1,6 +1,6 @@
 {
   "name": "kad-telemetry-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "framework for analyzing network behavior and performance for kad",
   "main": "index.js",
   "directories": {
@@ -30,17 +30,17 @@
   },
   "homepage": "https://github.com/kadtools/kad-telemetry#readme",
   "devDependencies": {
-    "chai": "^3.4.1",
-    "coveralls": "^2.11.6",
-    "istanbul": "^0.4.2",
-    "jshint": "^2.9.1",
-    "mocha": "^2.3.4",
-    "proxyquire": "^1.7.3",
-    "sinon": "^1.17.2"
+    "chai": "3.5.0",
+    "coveralls": "2.11.12",
+    "istanbul": "0.4.5",
+    "jshint": "2.9.3",
+    "mocha": "3.0.2",
+    "proxyquire": "1.7.10",
+    "sinon": "1.17.5"
   },
   "dependencies": {
-    "async-each": "^1.0.1",
-    "kad-js": "^1.6.0",
-    "lodash": "^4.15.0"
+    "async-each": "1.0.1",
+    "kad-js": "1.6.1",
+    "lodash": "4.15.0"
   }
 }

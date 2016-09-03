@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var kad = require('kad');
+var kad = require('kad-js');
 var Router = kad.Router;
 var RouterDecorator = require('../lib/router-decorator');
 var TransportDecorator = require('../lib/transport-decorator');

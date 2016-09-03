@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect;
-var kad = require('kad');
+var kad = require('kad-js');
 var Message = kad.Message;
 var Contact = kad.contacts.AddressPortContact;
 var ReliabilityMetric = require('../../lib/metrics/reliability');

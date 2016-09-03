@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 var TEST_FILE = require('os').tmpdir() + '/telemetry.test';
-var kad = require('kad');
+var kad = require('kad-js');
 var Persistence = require('../lib/persistence');
 var AddressPortContact = kad.contacts.AddressPortContact;
 var UDPTransport = kad.transports.UDP;
