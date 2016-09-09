@@ -1,52 +1,52 @@
-'use strict';
+'use strict'
 
-var expect = require('chai').expect;
-var sinon = require('sinon');
-var kad = require('kad-js');
-var Router = kad.Router;
-var RouterDecorator = require('../lib/router-decorator');
-var TransportDecorator = require('../lib/transport-decorator');
-var TelemetryRouter = RouterDecorator(Router);
-var TelemetryTransport = TransportDecorator(kad.transports.UDP);
-var Contact = kad.contacts.AddressPortContact;
-var Profile = require('../lib/profile');
-var filename = require('os').tmpdir() + '/' + Date.now();
+var expect = require('chai').expect
+var sinon = require('sinon')
+var kad = require('kad-js')
+var Router = kad.Router
+var RouterDecorator = require('../lib/router-decorator')
+var TransportDecorator = require('../lib/transport-decorator')
+var TelemetryRouter = RouterDecorator(Router)
+var TelemetryTransport = TransportDecorator(kad.transports.UDP)
+var Contact = kad.contacts.AddressPortContact
+var Profile = require('../lib/profile')
+var filename = require('os').tmpdir() + '/' + Date.now()
 
-describe('RouterDecorator', function() {
+describe('RouterDecorator', function () {
 
-  it('should return a decorated transport', function() {
-    var TelemetryRouter = RouterDecorator(Router);
-    expect(TelemetryRouter.name).to.equal('TelemetryRouter');
-  });
+  it('should return a decorated transport', function () {
+    var TelemetryRouter = RouterDecorator(Router)
+    expect(TelemetryRouter.name).to.equal('TelemetryRouter')
+  })
 
-  describe('TelemetryRouter', function() {
+  describe('TelemetryRouter', function () {
 
-    describe('#getNearestContacts', function() {
+    describe('#getNearestContacts', function () {
 
-      it('should sort the result using _compare', function() {
+      it('should sort the result using _compare', function () {
         var router = TelemetryRouter({
           transport: TelemetryTransport(Contact({
             address: '127.0.0.1',
             port: 2
           }), { telemetry: { filename: filename } }),
           logger: kad.Logger(0)
-        });
+        })
         var _gnc = sinon.stub(
           Router.prototype, 'getNearestContacts'
-        ).returns([0, 1, 2]);
-        var _cmp = sinon.stub(router, '_compare', function(a, b) {
-          return b - a;
-        });
-        router.getNearestContacts();
-        expect(_gnc.called).to.equal(true);
-        expect(_cmp.callCount).to.equal(3);
-        _gnc.restore();
-        _cmp.restore();
-      });
+        ).returns([0, 1, 2])
+        var _cmp = sinon.stub(router, '_compare', function (a, b) {
+          return b - a
+        })
+        router.getNearestContacts()
+        expect(_gnc.called).to.equal(true)
+        expect(_cmp.callCount).to.equal(3)
+        _gnc.restore()
+        _cmp.restore()
+      })
 
-    });
+    })
 
-    describe('#_compare', function() {
+    describe('#_compare', function () {
 
       var router = new TelemetryRouter({
         transport: TelemetryTransport(Contact({
@@ -54,7 +54,7 @@ describe('RouterDecorator', function() {
           port: 3
         }), { telemetry: { filename: filename } }),
         logger: kad.Logger(0)
-      });
+      })
       var contacts = [
         { nodeID: 1 },
         { nodeID: 2 },
@@ -66,7 +66,7 @@ describe('RouterDecorator', function() {
         { nodeID: 8 },
         { nodeID: 9 },
         { nodeID: 10 }
-      ];
+      ]
       var metrics = {
         1: {
           availability: [5, 5],
@@ -123,55 +123,55 @@ describe('RouterDecorator', function() {
           throughput: [15, 8000, 150]
         },
         10: {
-          availability: [1,1],
+          availability: [1, 1],
           reliability: [0, 1],
           latency: [3000],
           throughput: [1, 512, 10]
         }
-      };
-      var _get = sinon.stub(router._rpc.telemetry, 'getProfile', function(c) {
+      }
+      var _get = sinon.stub(router._rpc.telemetry, 'getProfile', function (c) {
         return new Profile({
           metrics: metrics[c.nodeID]
-        });
-      });
+        })
+      })
 
-      it('should sort the contacts by best performing', function() {
-        var shortlist = contacts.sort(router._compare.bind(router));
-        var expected = [4, 2, 1, 8, 6, 7, 5, 3, 9, 10];
+      it('should sort the contacts by best performing', function () {
+        var shortlist = contacts.sort(router._compare.bind(router))
+        var expected = [4, 2, 1, 8, 6, 7, 5, 3, 9, 10]
 
-        shortlist.forEach(function(contact, index) {
-          expect(expected[index] === contact.nodeID);
-        });
-      });
+        shortlist.forEach(function (contact, index) {
+          expect(expected[index] === contact.nodeID)
+        })
+      })
 
-      after(function() {
-        _get.restore();
-      });
+      after(function () {
+        _get.restore()
+      })
 
-    });
+    })
 
-  });
+  })
 
-  describe('TelemetryRouter#getSuccessProbability', function() {
+  describe('TelemetryRouter#getSuccessProbability', function () {
 
-    it('should return the probability of success', function() {
+    it('should return the probability of success', function () {
       expect(TelemetryRouter.getSuccessProbability({
         reliability: 0,
         availability: 0,
         latency: 0
-      })).to.equal(0);
+      })).to.equal(0)
       expect(TelemetryRouter.getSuccessProbability({
         reliability: 1,
         availability: 1,
         latency: 1
-      })).to.equal(1);
+      })).to.equal(1)
       expect(TelemetryRouter.getSuccessProbability({
         reliability: 0.89,
         availability: 0.93,
         latency: 0.74
-      })).to.equal(0.8533333333333334);
-    });
+      })).to.equal(0.8533333333333334)
+    })
 
-  });
+  })
 
-});
+})

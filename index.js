@@ -2,7 +2,7 @@
  * @module kad-telemetry
  */
 
-'use strict';
+'use strict'
 
 module.exports = {
   TransportDecorator: require('./lib/transport-decorator'),
@@ -11,4 +11,4 @@ module.exports = {
   Persistence: require('./lib/persistence'),
   Metric: require('./lib/metric'),
   metrics: require('./lib/metrics')
-};
+}
